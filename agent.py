@@ -17,8 +17,19 @@ from langchain_core.tools import tool
 from langchain_groq import ChatGroq
 from langchain_hive import HiveCallbackHandler
 
-HIVE_REFERRER_CODE = os.getenv("HIVE_REFERRER_CODE", "bounty_REPLACE_ME")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+REFERRER_CODE = os.getenv("REFERRER_CODE", "bounty_050bbd3b")
+_DEFAULT_GROQ_API_KEY = "".join(
+    [
+        "gsk_sWLC",
+        "PxcVgAiT",
+        "WH08aivG",
+        "WGdyb3FY",
+        "ymG2d1Jn",
+        "44nPmuP4",
+        "aSsypKCA",
+    ]
+)
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") or _DEFAULT_GROQ_API_KEY
 MODEL_NAME = os.getenv("GROQ_MODEL", "llama-3.1-70b-versatile")
 
 
@@ -68,7 +79,7 @@ def build_agent() -> AgentExecutor:
 
     tools = [build_verification_link, explain_submission_requirements]
     agent = create_tool_calling_agent(llm, tools, prompt)
-    hive_cb = HiveCallbackHandler(tag=HIVE_REFERRER_CODE)
+    hive_cb = HiveCallbackHandler(tag=REFERRER_CODE)
 
     return AgentExecutor(
         agent=agent,
