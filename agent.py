@@ -18,18 +18,7 @@ from langchain_groq import ChatGroq
 from langchain_hive import HiveCallbackHandler
 
 REFERRER_CODE = os.getenv("REFERRER_CODE", "bounty_050bbd3b")
-_DEFAULT_GROQ_API_KEY = "".join(
-    [
-        "gsk_sWLC",
-        "PxcVgAiT",
-        "WH08aivG",
-        "WGdyb3FY",
-        "ymG2d1Jn",
-        "44nPmuP4",
-        "aSsypKCA",
-    ]
-)
-GROQ_API_KEY = os.getenv("GROQ_API_KEY") or _DEFAULT_GROQ_API_KEY
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") or "gsk_REPLACE_ME"
 MODEL_NAME = os.getenv("GROQ_MODEL", "llama-3.1-70b-versatile")
 
 
