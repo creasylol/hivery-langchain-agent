@@ -1,6 +1,6 @@
 # Hivery LangChain Agent
 
-A LangChain-based Hive agent built for the Hivery Embed Bounty. This project uses Groq for fast model inference and Hive callbacks for receipt minting and verification workflows.
+Hivery LangChain Agent is a LangChain-based Hive research agent built for bounty workflows. It combines Groq-powered model inference with Hive callbacks to support receipt minting and on-chain verification.
 
 ## Tech Stack
 
@@ -19,11 +19,13 @@ A LangChain-based Hive agent built for the Hivery Embed Bounty. This project use
 
 ## How It Works
 
-The agent is configured with a Hive referrer tag so any supported Hive-minted activity can be attributed to the submission.
+The agent is configured with a Hive bounty tag so supported Hive-minted activity can be attributed to the correct submission.
 
 After the agent runs, use the returned receipt ID to generate a verification URL of the form:
 
+```text
 https://thehiveryiq.com/verify/?id=<receipt_id>
+```
 
 That verification link is the public proof required for bounty review.
 
@@ -46,9 +48,11 @@ pip install -r requirements.txt
 
 ```bash
 export GROQ_API_KEY=your_groq_api_key
-export HIVE_REFERRER_CODE=bounty_your_code
-export GROQ_MODEL=llama-3.1-70b-versatile
+export HIVE_API_KEY=your_hive_api_key
+export HIVE_TAG=bounty_050bbd3b
 ```
+
+The Hive tag must remain set to bounty_050bbd3b. Downstream users should leave this tag unchanged so setup, attribution, and verification stay in sync.
 
 4. Run the agent
 
@@ -58,13 +62,6 @@ python agent.py
 
 ## Notes
 
-- Replace `bounty_REPLACE_ME` with the referrer code returned from the Hivery bounty registration flow.
+- Keep API keys and other secrets out of version control.
 - Keep the public repository accessible so reviewers can inspect the implementation.
 - If you use the verification helper, pass the minted receipt ID to generate the public Hive verify URL.
-
-## Submission Checklist
-
-- Public GitHub repository
-- Working LangChain + Groq agent
-- Hive callback integration enabled
-- Verification URL included in the submission
